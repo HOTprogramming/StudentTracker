@@ -19,11 +19,15 @@ export class AppRoutingService {
 
   getRoutes() {
     console.log('getRoutes', environment.production, isPlatformBrowser(this.platformId));
+ 
     if (environment.production) {
       return new Promise((resolve, reject) => {
         this.getData(resolve);
       });
     } else {
+
+    } else if (isPlatformBrowser(this.platformId)) {
+
       return new Promise((resolve, reject) => {
         this.loadGapi().subscribe((a) => {
           this.loadGapiAuth().subscribe((user: Object) => {
